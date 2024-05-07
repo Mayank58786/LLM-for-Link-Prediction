@@ -132,8 +132,8 @@ dmypy.json
 jobs/
 
 # Data files
-data/
-!data/utils.py
+#data/
+#!data/utils.py
 
 # vim files
 *.swp
