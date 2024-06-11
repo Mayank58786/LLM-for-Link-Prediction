@@ -1,1 +1,9 @@
-Link Prediction
+Link Prediction Project
+
+To Create the ENV --> conda env create --file blp.yml
+
+Activate --> conda activate blp
+
+Download the data and put it in the data file
+
+git clone https://github.com/dfdazac/blp.git
