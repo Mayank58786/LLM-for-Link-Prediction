@@ -1,13 +1,23 @@
-Link Prediction Project
+Link Prediction Project Setting Up
 
+1.
 To Create the ENV --> conda env create --file blp.yml
 
+2.
 Activate --> conda activate blp
 
-Download the data and put it in the data file
-
+3.
 git clone https://github.com/dfdazac/blp.git
 
-Job Script
+4.
+Download the data and put it in the data file
+
+5.
+Modify the train.py if you want the WANDB by the train.py that is here
+
+6.
+Edit the Jobscript file as needed for instance which script needed & Wandb token
+
+---------------- Job Script ----------------
 To Submit   sbatch job_script.sh
 To Monitor   squeue -u your_username
