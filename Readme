@@ -7,3 +7,7 @@ Activate --> conda activate blp
 Download the data and put it in the data file
 
 git clone https://github.com/dfdazac/blp.git
+
+Job Script
+To Submit   sbatch job_script.sh
+To Monitor   squeue -u your_username
