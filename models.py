@@ -103,11 +103,17 @@ class BertEmbeddingsLP(InductiveLinkPrediction):
                                                  output_hidden_states=False)
         hidden_size = self.encoder.config.hidden_size
         self.enc_linear = nn.Linear(hidden_size, self.dim, bias=False)
+        self.add_enc_linear2 = nn.Linear(self.dim, self.dim, bias=False)
+        self.add_enc_linear3 = nn.Linear(self.dim, self.dim, bias=False)
 
     def _encode_entity(self, text_tok, text_mask):
         # Extract BERT representation of [CLS] token
         embs = self.encoder(text_tok, text_mask)[0][:, 0]
         embs = self.enc_linear(embs)
+        embs = F.relu(embs)
+        embs = self.add_enc_linear2(embs)
+        embs = F.relu(embs)
+        embs = self.add_enc_linear3(embs)
         return embs
 
 

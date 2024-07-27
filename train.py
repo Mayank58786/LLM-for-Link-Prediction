@@ -13,7 +13,7 @@ from collections import defaultdict
 import numpy as np
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, balanced_accuracy_score
-import joblib
+import joblib 
 
 from data import CATEGORY_IDS
 from data import GraphDataset, TextGraphDataset, GloVeTokenizer
@@ -324,11 +324,15 @@ def link_prediction(dataset, inductive, dim, model, rel_model, loss_fn,
                             len(train_val_test_ent), train_data.num_rels,
                             encoder_name, regularizer)
     if checkpoint is not None:
-        model.load_state_dict(torch.load(checkpoint, map_location='cpu'))
+        model.load_state_dict(torch.load(checkpoint, map_location='cpu'), strict=False)
+    
+    for name, param in model.named_parameters():
+        if 'add_' not in name:  # Assuming the new layers have 'new_layer' in their names
+            param.requires_grad = False
 
     if device != torch.device('cpu'):
         model = torch.nn.DataParallel(model).to(device)
-
+    print(model)
     optimizer = Adam(model.parameters(), lr=lr)
     total_steps = len(train_loader) * max_epochs
     if use_scheduler:
